@@ -89,5 +89,5 @@ Rails.application.configure do
   config.action_cable.allowed_request_origins = ['https://bodrovis-cable.herokuapp.com',
                                                  'http://bodrovis-cable.herokuapp.com']
 
-  config.action_cable.url = "wss://bodrovis-cable.herokuapp.com"
+  config.action_cable.url = "wss://bodrovis-cable.herokuapp.com/cable"
 end
