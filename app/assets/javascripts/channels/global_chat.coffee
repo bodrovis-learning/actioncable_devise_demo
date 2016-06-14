@@ -15,7 +15,7 @@ jQuery ->
         @perform 'send_message', message: message # do the actual broadcasting
 
 
-    $('#new_message').submit (e) ->
+    $('#new_message').submit (e) -> # this event happens when the message is actually submitted
       input = $(this).find('#message_body')
       unless $.trim(input.val()) is ''
         App.global_chat.send_message input.val() # broadcast this message
@@ -23,5 +23,5 @@ jQuery ->
       e.preventDefault() # prevent the actual submitting of the form
       return false
 
-    $('.global_chat_toggler').click ->
+    $('.global_chat_toggler').click -> # this is the "hide/show chat window" button
       $(this).parents('.global_chat').toggleClass('collapsed')
