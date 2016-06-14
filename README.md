@@ -2,15 +2,20 @@
 
 ## Main files worth checking
 
-* cable.js (has to be included in application.js)
-* channels/global_chat.coffee
-* **all** files inside channels directory (*connection.rb* is used to check whether a user is logged in or not)
-* message_broadcast_job.rb
-* message.rb
-* user.rb
-* controllers
-* views. Especially don't forget to add `action_cable_meta_tag` into your layout
-* Gemfile. `gem 'redis'` should be added
+* [cable.js](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/assets/javascripts/cable.js) (has to be included in application.js). This file contains basic code for ActionCable to work correctly.
+* [channels/global_chat.coffee](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/assets/javascripts/channels/global_chat.coffee).
+This is the main file with all JS code to work with ActionCable and also to hide/show the chat window itself.
+* [global_chat.scss](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/assets/stylesheets/global_chat.scss).
+This contains all the styles for the chat window. Design sucks, so modify those as necessary (for example,
+by tweaking colors, height of the window, padding etc).
+* **all** files inside [channels directory](https://github.com/bodrovis-learning/actioncable_devise_demo/tree/master/app/channels) (*connection.rb* is used to check whether a user is logged in or not)
+* [message_broadcast_job.rb](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/jobs/message_broadcast_job.rb)
+* message.rb and user.rb models. Obviously, these files can vary from app to app, but the main point here is that one user may have many messages - that is, one to many relations.
+Another VERY IMPORTANT piece of code is [this callback](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/models/message.rb#L6).
+* controllers may vary. Note presence of [these two callbacks](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/controllers/application_controller.rb#L6) however.
+* views. Especially don't forget to add `action_cable_meta_tag` into [your layout](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/layouts/application.html.erb#L6). Don't forget
+that the markup for the global chat itself is packed inside the [partial](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/shared/_global_chat.html.erb).
+* Gemfile. `gem 'redis'` [should be added](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/Gemfile#L7)
 
 ### For Heroku
 
