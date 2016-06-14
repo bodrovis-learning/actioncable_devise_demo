@@ -87,4 +87,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_cable.allowed_request_origins = ['https://bodrovis-cable.herokuapp.com/, http://bodrovis-cable.herokuapp.com/']
+
+  config.web_socket_server_url = "wss://bodrovis-cable.herokuapp.com"
 end
