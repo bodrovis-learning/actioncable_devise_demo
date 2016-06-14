@@ -1,0 +1,17 @@
+<h1>Welcome to global chat</h1>
+
+<p>
+  Logged in as <%= current_user.email %>
+  <%= link_to 'Log Off', destroy_user_session_path, method: :delete %>
+</p>
+
+<div id="messages">
+  <%= render @messages %>
+</div>
+
+<%= form_for @message, url: '' do |f| %>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+
+  <%= f.submit %>
+<% end %>
