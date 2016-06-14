@@ -13,8 +13,12 @@ by tweaking colors, height of the window, padding etc).
 * message.rb and user.rb models. Obviously, these files can vary from app to app, but the main point here is that one user may have many messages - that is, one to many relations.
 Another VERY IMPORTANT piece of code is [this callback](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/models/message.rb#L6).
 * controllers may vary. Note presence of [these two callbacks](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/controllers/application_controller.rb#L6) however.
+Also note the presence of [MessagesController](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/controllers/messages_controller.rb). It may be empty, but has to be present in order to render
+[messages from ActiveJob](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/jobs/message_broadcast_job.rb#L11). If you already have such controller, rename it but also don't forget to rename
+the corresponding view folder and all references to this controller.
 * views. Especially don't forget to add `action_cable_meta_tag` into [your layout](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/layouts/application.html.erb#L6). Don't forget
 that the markup for the global chat itself is packed inside the [partial](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/shared/_global_chat.html.erb).
+The actual message to render is located in its [own partial](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/messages/_message.html.erb) as well.
 * Gemfile. `gem 'redis'` [should be added](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/Gemfile#L7)
 
 ### For Heroku
