@@ -1,0 +1,18 @@
+<div class="global_chat collapsed">
+  <div class="global_chat_toggler">
+    <h3>Our super chat</h3>
+  </div>
+
+  <div class="global_chat_inner">
+    <div id="messages">
+      <%= render @messages %>
+    </div>
+
+    <%= form_for @message, url: '' do |f| %>
+      <%= f.label :body %>
+      <%= f.text_field :body %>
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

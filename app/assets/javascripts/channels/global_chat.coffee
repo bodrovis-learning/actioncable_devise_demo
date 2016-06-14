@@ -22,3 +22,6 @@ jQuery ->
         input.val('')
       e.preventDefault() # prevent the actual submitting of the form
       return false
+
+    $('.global_chat_toggler').click ->
+      $(this).parents('.global_chat').toggleClass('collapsed')

@@ -11,6 +11,22 @@
 </head>
 
 <body>
+
+<p>
+  Logged in as <%= current_user.email %>
+  <%= link_to 'Log Off', destroy_user_session_path, method: :delete %>
+</p>
+
+<nav>
+  <ul>
+    <li><%= link_to 'Home', root_path%></li>
+    <li><%= link_to 'Other page', other_page_path %></li>
+  </ul>
+</nav>
+
 <%= yield %>
+
+<%= render 'shared/global_chat' %>
+
 </body>
 </html>
