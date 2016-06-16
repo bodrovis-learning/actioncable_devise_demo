@@ -4,12 +4,4 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
-  before_action :prepare_messages
-
-  private
-
-  def prepare_messages
-    @messages = Message.order('created_at DESC')
-    @message = Message.new
-  end
 end

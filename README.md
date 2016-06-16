@@ -1,25 +1,46 @@
 # ActionCable with Devise demo
 
+This demo shows how to build a chat app supporting multiple chat rooms and basic authorization. Only
+authenticated users may access the app and only authorized ones may enter chat room (members of the room).
+Powered by ActionCable, Devise, Redis, Formtastic
+
+## Setup
+
+There are 4 models:
+
+* User
+* ChatRoom
+* RoomUser
+* Message
+
+User can be an owner of a chat room - in this case he is able to assign members to it. Members,
+in turn, are permitted to enter chat room and post messages. Other users cannot enter chat rooms or listen
+to socket.
+
+RoomUser is an intermediate model to establish many-to-many relation between users and chat rooms.
+RoomUsersController is used to add or remove members of a chat room; only owner may do this.
+
 ## Main files worth checking
 
 * [cable.js](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/assets/javascripts/cable.js) (has to be included in application.js). This file contains basic code for ActionCable to work correctly.
-* [channels/global_chat.coffee](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/assets/javascripts/channels/global_chat.coffee).
-This is the main file with all JS code to work with ActionCable and also to hide/show the chat window itself.
-* [global_chat.scss](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/assets/stylesheets/global_chat.scss).
-This contains all the styles for the chat window. Design sucks, so modify those as necessary (for example,
-by tweaking colors, height of the window, padding etc).
+* [channels/rooms.coffee](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/assets/javascripts/channels/rooms.coffee).
+This is the main file with all JS code to work with ActionCable.
 * **all** files inside [channels directory](https://github.com/bodrovis-learning/actioncable_devise_demo/tree/master/app/channels) (*connection.rb* is used to check whether a user is logged in or not)
 * [message_broadcast_job.rb](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/jobs/message_broadcast_job.rb)
 * message.rb and user.rb models. Obviously, these files can vary from app to app, but the main point here is that one user may have many messages - that is, one to many relations.
 Another VERY IMPORTANT piece of code is [this callback](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/models/message.rb#L6).
-* controllers may vary. Note presence of [these two callbacks](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/controllers/application_controller.rb#L6) however.
+* chat_room.rb and room_user.rb models.
+* controllers may vary. Note presence of [the callback](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/controllers/application_controller.rb#L6) however.
 Also note the presence of [MessagesController](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/controllers/messages_controller.rb). It may be empty, but has to be present in order to render
 [messages from ActiveJob](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/jobs/message_broadcast_job.rb#L11). If you already have such controller, rename it but also don't forget to rename
 the corresponding view folder and all references to this controller.
-* views. Especially don't forget to add `action_cable_meta_tag` into [your layout](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/layouts/application.html.erb#L6). Don't forget
-that the markup for the global chat itself is packed inside the [partial](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/shared/_global_chat.html.erb).
+* RoomUsersController is required to manage members of a room.
+* views. Especially don't forget to add `action_cable_meta_tag` into [your layout](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/layouts/application.html.erb#L6).
 The actual message to render is located in its [own partial](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/messages/_message.html.erb) as well.
-* Gemfile. `gem 'redis'` [should be added](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/Gemfile#L7)
+* Gemfile. `gem 'redis'` [should be added](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/Gemfile#L7).
+Also `gem 'formtastic'` is used to easily build forms.
+* [show.html.erb for chat rooms](https://github.com/bodrovis-learning/actioncable_devise_demo/blob/master/app/views/chat_rooms/show.html.erb) - the main view where messages are listed and the form is located.
+The room's id is stored as a `data-` attribute. It is then passed as a parameter when establishing a connection inside the script.
 
 ### For Heroku
 
