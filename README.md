@@ -1,5 +1,7 @@
 # ActionCable with Devise demo
 
+[Demo](https://bodrovis-cable.herokuapp.com)
+
 This demo shows how to build a chat app supporting multiple chat rooms and basic authorization. Only
 authenticated users may access the app and only authorized ones may enter chat room (members of the room).
 Powered by ActionCable, Devise, Redis, Formtastic
