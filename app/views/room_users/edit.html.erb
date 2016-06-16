@@ -1,0 +1,7 @@
+<h1>Edit members of room <%= @chat_room.title %></h1>
+
+<%= semantic_form_for @chat_room, url: room_user_path(@chat_room), method: :patch do |f| %>
+  <%= f.input :users, as: :select, collection: User.all.pluck(:email, :id) %>
+
+  <%= f.action :submit %>
+<% end %>

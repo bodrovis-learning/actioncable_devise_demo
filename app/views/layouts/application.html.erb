@@ -12,21 +12,28 @@
 
 <body>
 
-<p>
-  Logged in as <%= current_user.email %>
-  <%= link_to 'Log Off', destroy_user_session_path, method: :delete %>
-</p>
+<div class="container">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
 
-<nav>
-  <ul>
-    <li><%= link_to 'Home', root_path%></li>
-    <li><%= link_to 'Other page', other_page_path %></li>
-  </ul>
-</nav>
+  <% if user_signed_in? %>
+    <p>
+      Logged in as <%= current_user.email %>
+      <%= link_to 'Log Off', destroy_user_session_path, method: :delete %>
+    </p>
+  <% end %>
 
-<%= yield %>
+  <nav>
+    <ul>
+      <li><%= link_to 'Home', root_path%></li>
+    </ul>
+  </nav>
 
-<%= render 'shared/global_chat' %>
+  <%= yield %>
+</div>
 
 </body>
 </html>

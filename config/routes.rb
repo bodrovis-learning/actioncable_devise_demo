@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  get '/other_page', to: 'pages#other_page', as: :other_page
-  root 'pages#index'
+  resources :chat_rooms, only: [:new, :create, :show, :index]
+
+  resources :room_users, only: [:edit, :update]
+
+  root 'chat_rooms#index'
 end

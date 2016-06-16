@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :messages, dependent: :destroy
+  has_many :owned_chat_rooms, class_name: 'ChatRoom', dependent: :destroy
+
+  has_many :room_users, dependent: :destroy
+  has_many :chat_rooms, through: :room_users
 end

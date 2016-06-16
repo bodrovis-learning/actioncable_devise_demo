@@ -20,6 +20,10 @@ gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5.x'
 
+gem 'bootstrap', '~> 4.0.0.alpha3'
+
+gem 'formtastic'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

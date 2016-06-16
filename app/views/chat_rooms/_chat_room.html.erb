@@ -1,0 +1,8 @@
+<% if chat_room.member?(current_user) %>
+<li>
+  <%= link_to "Enter #{chat_room.title}", chat_room_path(chat_room) %>
+  <% if chat_room.owner?(current_user) %>
+    <%= link_to 'Manage members', edit_room_user_path(chat_room) %>
+  <% end %>
+</li>
+<% end %>
