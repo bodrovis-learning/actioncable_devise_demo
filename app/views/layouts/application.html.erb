@@ -6,8 +6,8 @@
   <%= action_cable_meta_tag %>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all', :'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'application', :'data-turbolinks-track' => 'reload' %>
 </head>
 
 <body>
@@ -19,11 +19,21 @@
     </div>
   <% end %>
 
-  <% if user_signed_in? %>
-    <p>
-      Logged in as <%= current_user.email %>
-      <%= link_to 'Log Off', destroy_user_session_path, method: :delete %>
-    </p>
+  <% if admin_signed_in? || user_signed_in? %>
+    <% if user_signed_in? %>
+      <p>
+        Logged in as <%= current_user.email %> (user)
+        <%= link_to 'Log Off', destroy_user_session_path, method: :delete %>
+      </p>
+    <% end %>
+    <% if admin_signed_in? %>
+      <p>
+        Logged in as <%= current_admin.email %> (admin)
+        <%= link_to 'Log Off', destroy_admin_session_path, method: :delete %>
+      </p>
+    <% end %>
+  <% else %>
+    <p><%= link_to 'User login', new_user_session_path %> | <%= link_to 'Admin login', new_admin_session_path %></p>
   <% end %>
 
   <nav>

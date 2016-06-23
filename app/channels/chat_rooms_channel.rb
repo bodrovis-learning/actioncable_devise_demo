@@ -16,6 +16,6 @@ class ChatRoomsChannel < ApplicationCable::Channel
 
   def permitted_for?(chat_room_id)
     chat_room = ChatRoom.find_by(id: chat_room_id)
-    chat_room && chat_room.member?(current_user)
+    chat_room && (chat_room.member?(current_user) || chat_room.owner?(current_admin))
   end
 end

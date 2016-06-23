@@ -1,4 +1,5 @@
 class RoomUsersController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_room
   before_action :check_owner!
 
@@ -19,6 +20,6 @@ class RoomUsersController < ApplicationController
   end
 
   def check_owner!
-    redirect_to root_path unless @chat_room.owner?(current_user)
+    redirect_to root_path unless @chat_room.owner?(current_admin)
   end
 end

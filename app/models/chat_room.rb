@@ -1,5 +1,5 @@
 class ChatRoom < ApplicationRecord
-  belongs_to :owner, class_name: 'User', foreign_key: :user_id
+  belongs_to :admin
   has_many :messages, dependent: :destroy
 
   has_many :room_users, dependent: :destroy
@@ -10,6 +10,6 @@ class ChatRoom < ApplicationRecord
   end
 
   def owner?(user)
-    owner == user
+    admin == user
   end
 end
